@@ -1,20 +1,65 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+    <ion-title>Mi Ubicación APP</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+  <div class="contenedor">
+
+    <ion-card class="card-ubicacion">
+
+      <div class="icono">
+        <ion-icon name="location"></ion-icon>
+      </div>
+
+      <ion-card-header>
+        <ion-card-title>Coordenadas actuales</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+
+        <div class="dato">
+          <span>Latitud</span>
+          <strong>{{ latitud() || '---' }}</strong>
+        </div>
+
+        <div class="dato">
+          <span>Longitud</span>
+          <strong>{{ longitud() || '---' }}</strong>
+        </div>
+
+        <p class="link" *ngIf="googleMaps()">
+          {{ googleMaps() }}
+        </p>
+
+      </ion-card-content>
+    </ion-card>
+
+    <div class="toast" *ngIf="mensaje()">
+    {{ mensaje() }}
+    </div>
+
+    <ion-button
+      expand="block"
+      class="btn-principal"
+      (click)="obtenerUbicacion()">
+
+      GUARDAR UBICACIÓN
+
+    </ion-button>
+
+    <ion-button
+      expand="block"
+      color="success"
+      (click)="abrirGoogleMaps()"
+      [disabled]="!googleMaps()">
+
+      ABRIR EN GOOGLE MAPS
+
+    </ion-button>
+
   </div>
+
 </ion-content>
